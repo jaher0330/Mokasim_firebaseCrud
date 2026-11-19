@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'auth_service.dart';
 import 'crud_service.dart';
+import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -119,6 +121,18 @@ class _HomePageState extends State<HomePage> {
             ),
             onPressed: () =>
                 setState(() => showOnlyFavorites = !showOnlyFavorites),
+          ),
+          // LOGOUT
+          IconButton(
+            tooltip: 'Logout',
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              AuthService().signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const LoginPage()),
+              );
+            },
           ),
         ],
       ),
